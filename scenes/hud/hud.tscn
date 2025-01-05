@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://pk8vxp8jen2e"]
+
+[ext_resource type="LabelSettings" uid="uid://byrx4037po2ul" path="res://assets/LG_red_24.tres" id="1_2qvml"]
+[ext_resource type="Script" path="res://scenes/hud/hud.gd" id="1_dsjg2"]
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dsjg2")
+
+[node name="Score" type="Label" parent="."]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 64.0
+offset_bottom = 49.0
+text = "0"
+label_settings = ExtResource("1_2qvml")

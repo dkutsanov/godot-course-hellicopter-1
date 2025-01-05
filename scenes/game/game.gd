@@ -1,17 +1,18 @@
 extends Node2D
 
-const PIPES = preload("res://scenes/pipes/pipes.tscn")
+const PIPES: PackedScene = preload("res://scenes/pipes/pipes.tscn")
 
 @onready var spawn_u: Marker2D = $SpawnU
 @onready var spawn_l: Marker2D = $SpawnL
-@onready var spawn_time: Timer = $SpawnTime
+@onready var spawn_timer: Timer = $SpawnTime
 @onready var pipes_holder: Node = $PipesHolder
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	ScoreManager.reset_score()
+	SignalManager.on_plane_died.connect(_on_plane_died)
 	spawn_pipes()
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -23,6 +24,14 @@ func spawn_pipes() -> void:
 	new_pipes.position = Vector2(spawn_l.position.x, yp)
 	pipes_holder.add_child(new_pipes)
 
+#func stop_pipes() -> void:
+	#spawn_timer.stop()
+	#for pipe in pipes_holder.get_children():
+	#	pipe.set_process(false)
 
 func _on_spawn_time_timeout() -> void:
 	spawn_pipes()
+
+
+func _on_plane_died() -> void:
+	spawn_timer.stop()

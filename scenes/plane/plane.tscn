@@ -1,10 +1,26 @@
-[gd_scene load_steps=7 format=3 uid="uid://c1i42dp33hphl"]
+[gd_scene load_steps=8 format=3 uid="uid://c1i42dp33hphl"]
 
 [ext_resource type="Script" path="res://scenes/plane/plane.gd" id="1_d45d5"]
 [ext_resource type="SpriteFrames" uid="uid://c4fta0kp74ma4" path="res://assets/plane_frames.tres" id="1_kabd4"]
+[ext_resource type="AudioStream" uid="uid://y8qoy0n08hyy" path="res://assets/audio/engine.mp3" id="3_t0p7r"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7aigb"]
 radius = 26.0
+
+[sub_resource type="Animation" id="Animation_mepjl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_es4y0"]
 resource_name = "power"
@@ -23,28 +39,13 @@ tracks/0/keys = {
 "values": [0.0, -0.523599, 0.0]
 }
 
-[sub_resource type="Animation" id="Animation_mepjl"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rcitk"]
 _data = {
 "RESET": SubResource("Animation_mepjl"),
 "power": SubResource("Animation_es4y0")
 }
 
-[node name="Plane" type="CharacterBody2D"]
+[node name="Plane" type="CharacterBody2D" groups=["Plane"]]
 script = ExtResource("1_d45d5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -60,3 +61,8 @@ shape = SubResource("CircleShape2D_7aigb")
 libraries = {
 "": SubResource("AnimationLibrary_rcitk")
 }
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_t0p7r")
+volume_db = -28.972
+autoplay = true

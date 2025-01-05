@@ -1,0 +1,104 @@
+[gd_scene load_steps=9 format=3 uid="uid://c3m8r51jf2r8"]
+
+[ext_resource type="Script" path="res://main/main.gd" id="1_3ywpm"]
+[ext_resource type="Texture2D" uid="uid://d02ym324kllk8" path="res://assets/background/sky.png" id="1_kq1vx"]
+[ext_resource type="LabelSettings" uid="uid://b3akwhldi20ae" path="res://assets/LG_red_72.tres" id="2_xfimp"]
+[ext_resource type="LabelSettings" uid="uid://c38i0siklxv1f" path="res://assets/LG_white_44.tres" id="3_71sl8"]
+[ext_resource type="LabelSettings" uid="uid://byrx4037po2ul" path="res://assets/LG_red_24.tres" id="4_skwx3"]
+[ext_resource type="AudioStream" uid="uid://cye1gijhrimbr" path="res://assets/audio/bgm_menu.mp3" id="5_yqpog"]
+
+[sub_resource type="Animation" id="Animation_3secy"]
+resource_name = "flash"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/Start:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6tkub"]
+_data = {
+"flash": SubResource("Animation_3secy")
+}
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3ywpm")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_kq1vx")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="Title" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "HELLICOPTER
+PART I"
+label_settings = ExtResource("2_xfimp")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Start" type="Label" parent="MarginContainer"]
+layout_mode = 2
+text = "PRESS SPACE
+TO
+PLAY"
+label_settings = ExtResource("3_71sl8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Highscore Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "HIGHSCORE"
+label_settings = ExtResource("4_skwx3")
+
+[node name="Highscore" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "1"
+label_settings = ExtResource("4_skwx3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6tkub")
+}
+autoplay = "flash"
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_yqpog")
+volume_db = -29.407
+autoplay = true
